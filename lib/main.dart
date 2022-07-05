@@ -8,18 +8,20 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final preferences = PreferencesUser();
   await preferences.initPreferences();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+
+  final preferences = PreferencesUser();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Preferences',
-        initialRoute: HomePage.nameRoute,
+        initialRoute: preferences.lastPage,
         routes: {
           HomePage.nameRoute: (BuildContext context) => HomePage(),
           SettingsPage.nameRoute: (BuildContext context) => const SettingsPage()

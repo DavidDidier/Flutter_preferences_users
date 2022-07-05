@@ -18,7 +18,7 @@ class PreferencesUser {
   //GET and SET del genero
 
   int get genero {
-    return _preferences.getInt('genero') ?? 1;
+    return _preferences.getInt('genero') ?? 2;
   }
 
   set genero(int valor) {
@@ -41,5 +41,14 @@ class PreferencesUser {
 
   set name(String valor) {
     _preferences.setString('name', valor);
+  }
+
+  //GET and SET last page
+  String get lastPage {
+    return _preferences.getString('lastPage') ?? 'home';
+  }
+
+  set lastPage(String valor) {
+    _preferences.setString('lastPage', valor);
   }
 }

@@ -13,16 +13,19 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  final preferences = PreferencesUser();
+
   bool _colorSecundario = false;
-  int _genero = 1;
+  int _genero = 2;
   String _nombre = 'Didier';
 
   late TextEditingController _textEditingController;
 
-  final preferences = PreferencesUser();
   @override
   void initState() {
     super.initState();
+
+    preferences.lastPage = SettingsPage.nameRoute;
     _genero = preferences.genero;
     _colorSecundario = preferences.colorSecundario;
 
@@ -63,26 +66,16 @@ class _SettingsPageState extends State<SettingsPage> {
                     preferences.colorSecundario = value;
                   });
                 }),
-            RadioListTile(
-                toggleable: true,
+            RadioListTile<int>(
                 value: 1,
                 title: const Text('Masculino'),
                 groupValue: _genero,
-                onChanged: (value) {
-                  setState(() {
-                    _setSelectedRadio;
-                  });
-                }),
-            RadioListTile(
-                toggleable: true,
+                onChanged: _setSelectedRadio(1)),
+            RadioListTile<int>(
                 value: 2,
                 title: const Text('Femenino'),
                 groupValue: _genero,
-                onChanged: (value) {
-                  setState(() {
-                    _setSelectedRadio;
-                  });
-                }),
+                onChanged: _setSelectedRadio(2)),
             const Divider(),
             Container(
                 padding: const EdgeInsets.only(left: 15.0, right: 15.0),
